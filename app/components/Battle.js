@@ -104,50 +104,55 @@ class Battle extends React.Component {
     var playerOneImage = this.state.playerOneImage;
     var playerTwoImage = this.state.playerTwoImage;
 
-    return (
+		return (
       <div>
         <div className='row'>
-					{!playerOneName &&
-					<PlayerInput
-					id='playerOne'
-					label='Player One'
-					onSubmit={this.handleSubmit} />
-					}
+          {!playerOneName &&
+            <PlayerInput
+              id='playerOne'
+              label='Player One'
+              onSubmit={this.handleSubmit}
+            />}
 
-         {playerOneImage !== null &&
-					<PlayerPreview
-					avatar={playerOneImage}
-					username={playerOneName}
-					onReset={this.handleReset}
-					id='playerOne' />
-					}
+          {playerOneImage !== null &&
+            <PlayerPreview
+              avatar={playerOneImage}
+              username={playerOneName}>
+                <button
+                  className='reset'
+                  onClick={this.handleReset.bind(this, 'playerOne')}>
+                    Reset
+                </button>
+            </PlayerPreview>}
 
-					{!playerTwoName &&
-					<PlayerInput
-					  id='playerTwo'
-					  label='Player Two'
-					  onSubmit={this.handleSubmit} />
-					}
+          {!playerTwoName &&
+            <PlayerInput
+              id='playerTwo'
+              label='Player Two'
+              onSubmit={this.handleSubmit}
+            />}
 
-					{playerTwoImage !== null &&
-					<PlayerPreview
-					avatar={playerTwoImage}
-					username={playerTwoName}
-					onReset={this.handleReset}
-					id='playerTwo' />
-					}
-
+          {playerTwoImage !== null &&
+            <PlayerPreview
+              avatar={playerTwoImage}
+              username={playerTwoName}>
+                <button
+                  className='reset'
+                  onClick={this.handleReset.bind(this, 'playerTwo')}>
+                    Reset
+                </button>
+            </PlayerPreview>}
         </div>
 
-				{playerOneImage && playerTwoImage &&
-					<Link
-						className='button'
-						to={{
-							pathname: match.url + '/results',
-							search: '?playerOneName=' + playerOneName + '&playerTwoName=' + playerTwoName
-						}}>
-						Battle
-					</Link>}
+        {playerOneImage && playerTwoImage &&
+          <Link
+            className='button'
+            to={{
+              pathname: match.url + '/results',
+              search: '?playerOneName=' + playerOneName + '&playerTwoName=' + playerTwoName
+            }}>
+              Battle
+          </Link>}
       </div>
     )
   }
